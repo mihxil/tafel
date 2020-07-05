@@ -1,0 +1,208 @@
+  Tafel-programma's in verschillende programeertalen:
+
+  4dos                             +
+  BASIC                            -
+  C                                -
+  Dbase                            +
+  Forth
+  Fortran                          -
+  LaTeX   (nog niet gelukt)
+  Pascal                           -
+  Prolog                           +
+  Lisp                             +
+  S
+  WP
+
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³5  REM tafel                                     ³
+³10 INPUT "Welke tafel?", i                       ³
+³20 FOR j = 1 TO 10                               ³
+³30 PRINT j; "*"; i; "="; i * j                   ³    Basic
+³40 NEXT                                          ³      (run
+³                                                 ³       of gwbasic tafel.bas)
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³      program tafel                              ³
+³      print *,'Welke tafel?'                     ³
+³      read *,i                                   ³
+³        do 10 j = 1,10                           ³    Fortran
+³        print *,j,'*',i,'=',i*j                  ³       
+³10    continue                                   ³
+³      end                                        ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³program tafel(input,output);                     ³                                     ³
+³var i,j:integer;                                 ³
+³begin                                            ³
+³  writeln('Welke tafel?');                       ³    Pascal
+³  readln(i);                                     ³
+³  for j:= 1 to 10 do writeln(j,'*',i,'=',i*j)    ³
+³end.                                             ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³/* tafel */                                      ³
+³#include <stdio.h>                               ³
+³main()                                           ³
+³{int i,j;                                        ³
+³ printf("Welke tafel:");                         ³
+³ scanf("%d",&j);                                 ³  C
+³ for(i=1;i<=10;i++) printf("%d*%d=%d\n",i,j,i*j);³
+³}                                                ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³// tafel                                         ³
+³#include <iostream.h>                            ³
+³main()                                           ³
+³{ cout << "Welke tafel:";                        ³
+³  cin  >> int i;                                 ³
+³  for (int j=1;j<=10;j++)                        ³  C++
+³       cout << j << "*" << i << "=" <<i*j <<newl;³
+³}                                                ³
+³                                                 ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³: tafel 11 1 do i . ." *" dup .                  ³  Forth
+³         ." =" dup i * . cr loop drop ;          ³     (bijv: 5 tafel)
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³/* Tafel   */                                    ³
+³schrijf(I,J) :- K is I*J,                        ³
+³                print(I,' * ',J,' = ',K), nl,    ³
+³                L is I+1,                        ³
+³                L =< 10,                         ³  Prolog
+³                schrijf(L,J).                    ³    (consult tafelp.pro.
+³                                                 ³     tafel.
+³tafel        :- print( 'Welke tafel? :' ),       ³    )
+³                read(J), nl,                     ³
+³                schrijf(1,J).                    ³                                                  ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³;;;tafel                                         ³
+³                                                 ³
+³(princ "Welke tafel?")                           ³
+³(set 'j (read))                                  ³
+³(do ( (i 1 (+ 1 i)) )                            ³
+³    ( (> i 10)                                   ³  Lisp
+³      nil                                        ³   ( xlisp tafel.lsp )
+³    )                                            ³
+³  (princ i)(princ "*")(princ j)(princ "=")       ³
+³  (print (* i (eval j)))                         ³
+³)                                                ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ i <- scan()                                     ³
+³ for (j in 1:10) {k <- c(k,j*i)}                 ³   S
+³ k                                               ³                                                 ³
+ÃÄofÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´                                                 ³
+³ i <- scan()                                     ³
+³ j <- 1:10                                       ³
+³ k <- i*j                                        ³
+³ k                                               ³
+ÃÄofÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ scan()*(1:10)                                   ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³:tafel                                           ³
+³@echo off                                        ³
+³input Welke tafel? %%i                           ³
+³set j=0                                          ³
+³:loop                                            ³
+³   set j=%@eval[%j+1]                            ³     4dos
+³   echo %j * %i = %@eval[%i*%j]                  ³
+³   if %j == 10 goto einde                        ³       (tafel.bat)
+³goto loop                                        ³
+³:einde                                           ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³%tafel                                           ³
+³\documentstyle[]{article}                        ³
+³\begin{document}                                 ³
+³\typein[\i]{Welke tafel?}                        ³
+³\setcounter{j}{1}                                ³  LaTeX
+³                        ??                       ³    (latex tafel.tex)
+³\end{document}                                   ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³{TEKST}i~Welke tafel?~                           ³
+³{VOOR}j~1~10~1~                                  ³
+³{WIJS TOE}k~{VAR}i~*{VAR}j~~                     ³  WP-macro-taal
+³{VAR}j~*{VAR}i~={VAR}k~{Return}                  ³     (alt-F10 tafel)
+³{EIND VOOR}                                      ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³input "Welke tafel?" to i                        ³
+³j=0                                              ³
+³do while j <10                                   ³
+³ j= j+1                                          ³ dBASE III-macro-taal
+³ i=i                                             ³     (do tafel)
+³ k= i*j                                          ³
+³enddo                                            ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³ var i                                           ³   Describe macro taal
+³ var j                                           ³   (tekstverwerker voor OS/2)
+³ var temp                                        ³
+³ var tussen                                      ³
+³                                                 ³
+³ MACRO tafel                                     ³
+³   get "Welke tafel? :" tovalue i                ³
+³   set j to 1                                    ³
+³   convert i tostring tussen                     ³
+³   set tussen to " * "+tussen                    ³
+³   set tussen to tussen+" = "                    ³
+³   repeat                                        ³
+³     exit when j>10                              ³
+³     convert j tostring temp                     ³
+³     put temp                                    ³
+³     put tussen                                  ³
+³     convert j*i tostring temp                   ³
+³     put temp                                    ³
+³     newparagraph                                ³
+³     set j to j+1                                ³
+³   end repeat                                    ³
+³ END MACRO                                       ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+recursie-varianten :
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³program recursie(input,output);                  ³
+³                                                 ³
+³var i,j:integer;                                 ³
+³                                                 ³
+³procedure loop;                                  ³
+³ begin                                           ³
+³   writeln(j,'*',i,'=',i*j);                     ³
+³   inc(j);                                       ³
+³   if j<=10 then loop                            ³
+³ end;                                            ³
+³                                                 ³
+³begin                                            ³
+³  writeln('Welke tafel');                        ³
+³  readln(i);                                     ³
+³  j:=1;                                          ³
+³  loop                                           ³
+³end.                                             ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³10 INPUT "Welke tafel", i                        ³
+³20 j = 1                                         ³
+³30 GOSUB 1000                                    ³
+³40 END                                           ³
+³1000 PRINT j; "*"; i; "="; i * j                 ³
+³1010 j = j + 1                                   ³
+³1020 IF j <= 10 THEN GOSUB 1000                  ³
+³1030 RETURN                                      ³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+³#include <stdio.h>                               ³
+³int i,j=1;                                       ³
+³                                                 ³
+³void loop(void)                                  ³
+³ {                                               ³
+³         printf("\n%d*%d=%d",j,i,i*j);           ³
+³         j++;                                    ³
+³         if (j<=10) loop();                      ³
+³ };                                              ³
+³                                                 ³
+³main()                                           ³
+³{                                                ³
+³        printf("\nWelke tafel?");                ³
+³        scanf("%d",&i);                          ³
+³        loop();                                  ³
+³}                                                ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+
+
+
+
+
+
+
+
+

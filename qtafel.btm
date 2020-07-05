@@ -1,0 +1,3 @@
+@echo off
+black
+q tafel.bas tafelq.bas tafel.pas tafel.mod tafel.c tafel.cpp tafel.for tafel.lsp tafel.pro tafel.fth tafel.btm tafel.tex

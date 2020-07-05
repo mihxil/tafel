@@ -1,0 +1,296 @@
+\documentstyle{article}
+\begin{document}
+\tableofcontents
+Ter illustratie van hoe verschillende programmeertalen er uit zien heb ik in zo
+veel mogelijk verschillende talen hetzelfde programma geschreven:
+\section{Basic}
+Nu volgende variant zal het in de meest dialecten wel doen:
+\begin{verbatim}
+5  REM tafel
+10 INPUT "Welke tafel?", i
+20 FOR j = 1 TO 10
+30 PRINT j; "*"; i; "="; i * j
+40 NEXT
+\end{verbatim}
+\section{Fortran}
+Het is niet precies hetzelfde als de anderen, omdat ik het print commando niet
+geheel en al begrijp:
+\begin{verbatim}
+      program tafel
+      print *,'Welke tafel?'
+      read *,i
+        do 10 j = 1,10
+        print *,j,'*',i,'=',i*j
+10    continue
+      end
+\end{verbatim}
+\section{Pascal}
+Deze versie doet het in elk geval met de Turbo-Pascal compiler, en ik hoop ook
+met de meeste andere versies van pascal.
+\begin{verbatim}
+program tafel(input,output);
+var i,j:integer;
+begin
+  writeln('Welke tafel?');
+  readln(i);
+  for j:= 1 to 10 do writeln(j,'*',i,'=',i*j)
+end.
+\end{verbatim}
+\section{Modula}
+Modula lijkt erg op Pascal, maar is case-sensitive, en nog veel
+gestructureerder. Een 'writeln'-statement zoals in Pascal, waarin je gewoon
+alles achter elkaar zet, schijnt niet te bestaan.
+\begin{verbatim}
+MODULE tafel;
+
+FROM InOut IMPORT WriteString, WriteInt,
+                  WriteLn, ReadInt;
+
+VAR i,j:INTEGER;
+BEGIN
+WriteString("Welke tafel: ?");
+ReadInt(i);
+FOR j := 1 TO 10 DO
+    WriteLn;
+    WriteInt(j,0);WriteString(" * ");
+    WriteInt(i,0);WriteString(" = ");
+    WriteInt(i*j,0);
+    END;
+END tafel.
+\end{verbatim}
+\section{C}
+Mogelijkerwijs moet het nog iets gebeuren aan 'main()' (void main(void) of zo)
+om het nog algemener te maken.
+\begin{verbatim}
+/* tafel */
+#include <stdio.h>
+main()
+{int i,j;
+ printf("Welke tafel:");
+ scanf("%d",&j);
+ for(i=1;i<=10;i++) printf("%d*%d=%d\n",i,j,i*j
+}
+\end{verbatim}
+\section{C++}
+C++ zou natuurlijk ook voorgaand C-programma kunnen compileren. In C++ kunnen
+sommige dingen echter eleganter worden opgelost:
+\begin{verbatim}
+// tafel
+#include <iostream.h>
+main()
+{ cout << "Welke tafel:";
+  cin  >> int i;
+  for (int j=1;j<=10;j++)
+       cout << j << "*" << i << "=" <<i*j <<new
+}
+\end{verbatim}
+\section{Forth}
+Wat we krijgen is niet echt vergelijkbaar met de anderen, want niet interactief
+(moet aangeroepen worden met bijvoorbeel: '5 tafel'), maar wel typisch Forth:
+\begin{verbatim}
+: tafel 11 1 do i . ." *" dup . ." =" dup i * . cr loop drop ;
+\end{verbatim}
+\section{Prolog}
+Slecht recursief wist ik het op te lossen. Dit is wel een van de talen die als
+input niet slecht een getal, maar ook een expressie accepteerd.
+\begin{verbatim}
+/* Tafel   */
+schrijf(I,J) :- K is I*J,
+                print(I,' * ',J,' = ',K), nl,
+                L is I+1,
+                L =< 10,
+                schrijf(L,J).
+
+tafel        :- print( 'Welke tafel? :' ),
+                read(J), nl,
+                schrijf(1,J).
+\end{verbatim}
+\section{Lisp}
+Ook de-Lisp variant accepteerd expressies, maar niet helemaal vanzelf. De
+'eval'-functie was hiervoor nodig.
+\begin{verbatim}
+;;;tafel
+
+(princ "Welke tafel?")
+(set 'j (read))
+(do ( (i 1 (+ 1 i)) )
+    ( (> i 10)
+      nil
+    )
+  (princ i)(princ "*")(princ j)(princ "=")
+  (print (* i (eval j)))
+)
+\end{verbatim}
+\section{S}
+De statistiek taal S is waarschijnlijk het efficients, maar een
+print-statement ontbreekt en de vergelijking is dus oneerlijk:
+\begin{verbatim}
+ scan()*(1:10)
+\end{verbatim}
+Om dan toch ook het werken vat variabelen en de for-loop te demonsteren nog
+twee varianten in S:
+\begin{verbatim}
+ i <- scan()
+ for (j in 1:10) {k <- c(k,j*i)}
+ k
+\end{verbatim}
+en
+\begin{verbatim}
+ i <- scan()
+ j <- 1:10
+ k <- i*j
+ k
+\end{verbatim}
+\section{4dos}
+Met 4dos is het ook eenvoudig mogelijk om er een batch-file van te maken. Dit
+is erg langzaam, maar levert waarschijnlijk de korste 'command-line-executable'
+of en accepteert ook expressies. In 4dos bestaat er tegenwoordig geloof ik ook
+een DO-loop welke natuurlijk eigenlijk toegepast had moeten worden.
+\begin{verbatim}
+rem tafel
+@echo off
+input Welke tafel? %%i
+set j=0
+:loop
+   set j=%@eval[%j+1]
+   echo %j * %i = %@eval[%i*%j]
+   if %j == 10 goto einde
+goto loop
+:einde
+\end{verbatim}
+\section{Word Perfect}
+Nu komen we in het gebied van de macro talen wat natuurlijk helemaal eindeloze
+bedoeling gaat worden, maar goed:
+\begin{verbatim}
+{TEKST}i~Welke tafel?~
+{VOOR}j~1~10~1~
+{WIJS TOE}k~{VAR}i~*{VAR}j~~
+{VAR}j~*{VAR}i~={VAR}k~{Return}
+{EIND VOOR}
+\end{verbatim}
+\section{Dbase}
+De Dbase variant geeft ook juiste resulaten, maar het formaat is tamelijk
+slecht:
+\begin{verbatim}
+input "Welke tafel?" to i
+j=0
+do while j <10
+ j= j+1
+ i=i
+ k= i*j
+enddo
+\end{verbatim}
+\section{Describe}
+Describe is een tekstverwerker voor OS/2 en heeft ook een macro taal. Deze
+variant is geschreven door Christian:
+\begin{verbatim}
+ var i
+ var j
+ var temp
+ var tussen
+
+ MACRO tafel
+   get "Welke tafel? :" tovalue i
+   set j to 1
+   convert i tostring tussen
+   set tussen to " * "+tussen
+   set tussen to tussen+" = "
+   repeat
+     exit when j>10
+     convert j tostring temp
+     put temp
+     put tussen
+     convert j*i tostring temp
+     put temp
+     newparagraph
+     set j to j+1
+   end repeat
+ END MACRO
+\end{verbatim}
+\section{Basic-recursie}
+In Prolog kon ik het alleen recursief oplossen. Maar dit kan natuurlijk ook in
+practisch elke andere taal. Zoals Basic:
+\begin{verbatim}
+10 INPUT "Welke tafel", i
+20 j = 1
+30 GOSUB 1000
+40 END
+1000 PRINT j; "*"; i; "="; i * j
+1010 j = j + 1
+1020 IF j <= 10 THEN GOSUB 1000
+1030 RETURN
+\end{verbatim}
+\section{Pascal-recursie}
+Een recursie variant in Pascal
+\begin{verbatim}
+program recursie(input,output);
+
+var i,j:integer;
+
+procedure loop;
+ begin
+   writeln(j,'*',i,'=',i*j);
+   inc(j);
+   if j<=10 then loop
+ end;
+
+begin
+  writeln('Welke tafel');
+  readln(i);
+  j:=1;
+  loop
+end.
+\end{verbatim}
+\section{C-recursie}
+En tenslotte een variant in C:
+\begin{verbatim}
+#include <stdio.h>
+int i,j=1;
+
+void loop(void)
+ {
+         printf("\n%d*%d=%d",j,i,i*j);
+         j++;
+         if (j<=10) loop();
+ };
+
+main()
+{
+        printf("\nWelke tafel?");
+        scanf("%d",&i);
+        loop();
+}
+\end{verbatim}
+\section{tot slot}
+Dat was het dan. Wat er nog, om uiteenlopende redenen, ontbreekt zijn
+tafelprogramma's in talen zoals 'COBOL' 'ADA' 'LOGO', natuurlijk \LaTeX en
+velen waarvan ik nog nooit gehoord heb, of nu niet aan denk.
+\end{document}
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+%tafel
+\documentstyle[]{article}
+\begin{document}
+\typein[\i]{Welke tafel?}
+\setcounter{j}{1}
+                        ??
+\end{document}
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+ecursie-varianten :
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+@echo off
+rem 4dos
+rem tafel
+input (4dos) Welke tafel ?: %%i
+do j=1 to 10
+  echo %j * %@eval[%i] = %@eval[%j*(%i)]
+enddo
